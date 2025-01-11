@@ -5,7 +5,7 @@ export interface CopyCreatorOptions {
   toDir: string;
 }
 
-export let copy = ({ from, toDir }: CopyCreatorOptions) =>
+export const copy = ({ from, toDir }: CopyCreatorOptions) =>
   function CopyFiles() {
     return src(from).pipe(dest(toDir));
   };
