@@ -5,14 +5,14 @@ export interface IconContextProps {
   rootClassName?: Ref<string>;
   csp?: Ref<{ nonce?: string }>;
 }
-let contextKey = Symbol('iconContext') as InjectionKey<IconContextProps>;
+const contextKey = Symbol('iconContext') as InjectionKey<IconContextProps>;
 
-export let useProvideIconContext = (props: IconContextProps) => {
+export const useProvideIconContext = (props: IconContextProps) => {
   provide(contextKey, props);
   return props;
 };
 
-export let useInjectIconContext = () => {
+export const useInjectIconContext = () => {
   return inject(contextKey, {
     prefixCls: ref('anticon'),
     rootClassName: ref(''),
