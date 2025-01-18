@@ -20,18 +20,18 @@ import {
   prop
 } from 'ramda';
 
-let __PLACEHOLDER__ = 'TWOTONE_ICON_FUNCTION_HOLDER';
-let __PRIMARY_COLOR__ = 'primaryColor';
-let __SECONDARY_COLOR__ = 'secondaryColor';
+const __PLACEHOLDER__ = 'TWOTONE_ICON_FUNCTION_HOLDER';
+const __PRIMARY_COLOR__ = 'primaryColor';
+const __SECONDARY_COLOR__ = 'secondaryColor';
 
-let getRegExpFromColors = pipe(
+const getRegExpFromColors = pipe(
   ap([toUpper, toLower]),
   map((color) => `("${color}")`),
   join('|'),
   (content) => new RegExp(content, 'g')
 );
 
-let colorsReplacer = applyTo({
+const colorsReplacer = applyTo({
   [__PRIMARY_COLOR__]: ['#333', '#333333'],
   [__SECONDARY_COLOR__]: ['#E6E6E6', '#D9D9D9', '#D8D8D8']
 })(
@@ -65,9 +65,9 @@ type ApplyFlippedReplaceType = ([replacement, pattern]: [string, RegExp]) => (
   str: string
 ) => string;
 
-let duplicate = <T>(n: T): [T, T] => [clone(n), clone(n)];
+const duplicate = <T>(n: T): [T, T] => [clone(n), clone(n)];
 
-export let twotoneStringify: StringifyFn = pipe(
+export const twotoneStringify: StringifyFn = pipe(
   duplicate,
   zipWith<
     (asnd: AbstractNodeDefinition) => string,
