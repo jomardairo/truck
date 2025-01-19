@@ -3,7 +3,7 @@ import { IconDefinition } from '../templates/types';
 
 describe('renderIconDefinitionToSVGElement', () => {
   it('should render fill correctly.', () => {
-    const icon: IconDefinition = {
+    let icon: IconDefinition = {
       name: 'account-book',
       theme: 'filled',
       icon: {
@@ -37,7 +37,7 @@ describe('renderIconDefinitionToSVGElement', () => {
   });
 
   it('should render twotone correctly.', () => {
-    const icon: IconDefinition = {
+    let icon: IconDefinition = {
       name: 'appstore',
       theme: 'twotone',
       icon(primaryColor: string, secondaryColor: string) {
