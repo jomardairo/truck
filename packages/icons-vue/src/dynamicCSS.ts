@@ -15,10 +15,10 @@ function contains(root: Node | null | undefined, n?: Node) {
   return false;
 }
 
-const APPEND_ORDER = 'data-vc-order';
-const MARK_KEY = `vc-icon-key`;
+let APPEND_ORDER = 'data-vc-order';
+let MARK_KEY = `vc-icon-key`;
 
-const containerCache = new Map<ContainerType, Node & ParentNode>();
+let containerCache = new Map<ContainerType, Node & ParentNode>();
 
 export type ContainerType = Element | ShadowRoot;
 export type Prepend = boolean | 'queue';
@@ -43,7 +43,7 @@ function getContainer(option: Options) {
     return option.attachTo;
   }
 
-  const head = document.querySelector('head');
+  let head = document.querySelector('head');
   return head || document.body;
 }
 
@@ -69,9 +69,9 @@ export function injectCSS(css: string, option: Options = {}) {
     return null;
   }
 
-  const { csp, prepend } = option;
+  let { csp, prepend } = option;
 
-  const styleNode = document.createElement('style');
+  let styleNode = document.createElement('style');
   styleNode.setAttribute(APPEND_ORDER, getOrder(prepend));
 
   if (csp && csp.nonce) {
@@ -79,13 +79,13 @@ export function injectCSS(css: string, option: Options = {}) {
   }
   styleNode.innerHTML = css;
 
-  const container = getContainer(option);
-  const { firstChild } = container;
+  let container = getContainer(option);
+  let { firstChild } = container;
 
   if (prepend) {
     // If is queue `prepend`, it will prepend first style and then append rest style
     if (prepend === 'queue') {
-      const existStyle = findStyles(container).filter(node =>
+      let existStyle = findStyles(container).filter(node =>
         ['prepend', 'prependQueue'].includes(node.getAttribute(APPEND_ORDER)),
       );
       if (existStyle.length) {
@@ -105,15 +105,15 @@ export function injectCSS(css: string, option: Options = {}) {
 }
 
 function findExistNode(key: string, option: Options = {}) {
-  const container = getContainer(option);
+  let container = getContainer(option);
 
   return findStyles(container).find(node => node.getAttribute(getMark(option)) === key);
 }
 
 export function removeCSS(key: string, option: Options = {}) {
-  const existNode = findExistNode(key, option);
+  let existNode = findExistNode(key, option);
   if (existNode) {
-    const container = getContainer(option);
+    let container = getContainer(option);
     container.removeChild(existNode);
   }
 }
@@ -122,12 +122,12 @@ export function removeCSS(key: string, option: Options = {}) {
  * qiankun will inject `appendChild` to insert into other
  */
 function syncRealContainer(container: ContainerType, option: Options) {
-  const cachedRealContainer = containerCache.get(container);
+  let cachedRealContainer = containerCache.get(container);
 
   // Find real container when not cached or cached container removed
   if (!cachedRealContainer || !contains(document, cachedRealContainer)) {
-    const placeholderStyle = injectCSS('', option);
-    const { parentNode } = placeholderStyle;
+    let placeholderStyle = injectCSS('', option);
+    let { parentNode } = placeholderStyle;
     containerCache.set(container, parentNode);
     container.removeChild(placeholderStyle);
   }
@@ -141,12 +141,12 @@ export function clearContainerCache() {
 }
 
 export function updateCSS(css: string, key: string, option: Options = {}) {
-  const container = getContainer(option);
+  let container = getContainer(option);
 
   // Sync real parent
   syncRealContainer(container, option);
 
-  const existNode = findExistNode(key, option);
+  let existNode = findExistNode(key, option);
 
   if (existNode) {
     if (option.csp && option.csp.nonce && existNode.nonce !== option.csp.nonce) {
@@ -160,7 +160,7 @@ export function updateCSS(css: string, key: string, option: Options = {}) {
     return existNode;
   }
 
-  const newNode = injectCSS(css, option);
+  let newNode = injectCSS(css, option);
   newNode.setAttribute(getMark(option), key);
   return newNode;
 }
