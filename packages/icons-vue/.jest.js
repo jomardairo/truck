@@ -1,6 +1,6 @@
-const libDir = process.env.LIB_DIR;
+let libDir = process.env.LIB_DIR;
 
-const transformIgnorePatterns = [
+let transformIgnorePatterns = [
   '/dist/',
   'node_modules/[^/]+?/(?!(es|node_modules)/)', // Ignore modules without es dir
 ];
