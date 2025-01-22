@@ -7,11 +7,11 @@ import { IconDirective } from './icon.directive';
 import { IconService } from './icon.service';
 import { ThemeType } from '@ant-design/icons-angular'
 
-var staticImportIcons = [
+const staticImportIcons = [
   AccountBookFill, AccountBookOutline, AccountBookTwoTone
 ];
 
-var pandaLiteral = `<svg viewBox="0 0 1024 1024">
+const pandaLiteral = `<svg viewBox="0 0 1024 1024">
 <path d="M99.096 315.634s-82.58-64.032-82.58-132.13c0-66.064 33.032-165.162 148.646-148.646 83.37 11.91 99.096 165.162 99.096 165.162l-165.162 115.614zM924.906 315.634s82.58-64.032 82.58-132.13c0-66.064-33.032-165.162-148.646-148.646-83.37 11.91-99.096 165.162-99.096 165.162l165.162 115.614z" fill="#6B676E" p-id="1143" />
 <path d="M1024 561.548c0 264.526-229.23 429.42-512.002 429.42S0 826.076 0 561.548 283.96 66.064 512.002 66.064 1024 297.022 1024 561.548z" fill="#FFEBD2" p-id="1144" />
 <path d="M330.324 842.126c0 82.096 81.34 148.646 181.678 148.646s181.678-66.55 181.678-148.646H330.324z" fill="#E9D7C3" p-id="1145" />
@@ -50,8 +50,8 @@ describe('@ant-design/icons-angular', () => {
       flush();
       fixture.detectChanges();
 
-      var iconElement = icons[ 0 ].nativeElement;
-      var svgElement = iconElement.firstElementChild;
+      const iconElement = icons[ 0 ].nativeElement;
+      const svgElement = iconElement.firstElementChild;
       expect(svgElement.tagName).toBe('svg');
       expect(svgElement.getAttribute('viewBox')).toBe('64 64 896 896');
       expect(svgElement.getAttribute('fill')).toBe('currentColor');
@@ -66,8 +66,8 @@ describe('@ant-design/icons-angular', () => {
       flush();
       fixture.detectChanges();
 
-      var iconElement = icons[ 0 ].nativeElement as HTMLElement;
-      var svgElement = iconElement.firstElementChild;
+      const iconElement = icons[ 0 ].nativeElement as HTMLElement;
+      const svgElement = iconElement.firstElementChild;
       expect(svgElement.children[ 0 ].getAttribute('fill')).toBe('#e6f7ff');
       expect(svgElement.children[ 1 ].getAttribute('fill')).toBe('#1890ff');
       expect(svgElement.children[ 2 ].getAttribute('fill')).toBe('#1890ff');
@@ -78,7 +78,7 @@ describe('@ant-design/icons-angular', () => {
       flush();
       fixture.detectChanges();
 
-      var iconElement = icons[ 0 ].nativeElement as HTMLElement;
+      const iconElement = icons[ 0 ].nativeElement as HTMLElement;
       expect(iconElement.firstElementChild.tagName).toBe('svg');
 
       testComponent.type = '';
@@ -98,8 +98,8 @@ describe('@ant-design/icons-angular', () => {
       flush();
       fixture.detectChanges();
 
-      var iconElement = icons[ 0 ].nativeElement as HTMLElement;
-      var svgElement = iconElement.firstElementChild;
+      const iconElement = icons[ 0 ].nativeElement as HTMLElement;
+      const svgElement = iconElement.firstElementChild;
       expect(svgElement.children[ 0 ].getAttribute('fill')).toBe('#e6f7ff');
       expect(svgElement.children[ 1 ].getAttribute('fill')).toBe('#1890ff');
       expect(svgElement.children[ 2 ].getAttribute('fill')).toBe('#1890ff');
@@ -114,7 +114,7 @@ describe('@ant-design/icons-angular', () => {
       flush();
       fixture.detectChanges();
 
-      var iconElement = icons[ 0 ].nativeElement as HTMLElement;
+      const iconElement = icons[ 0 ].nativeElement as HTMLElement;
       expect(iconElement.firstElementChild.tagName).toBe('svg');
     }));
 
@@ -149,8 +149,8 @@ describe('@ant-design/icons-angular', () => {
       setTimeout(() => {
         fixture.detectChanges();
 
-        var iconElement = icons[ 0 ].nativeElement;
-        var svgElement = iconElement.firstElementChild;
+        const iconElement = icons[ 0 ].nativeElement;
+        const svgElement = iconElement.firstElementChild;
         expect(svgElement.tagName).toBe('svg');
         expect(svgElement.getAttribute('viewBox')).toBe('64 64 896 896');
         expect(svgElement.getAttribute('fill')).toBe('currentColor');
@@ -173,8 +173,8 @@ describe('@ant-design/icons-angular', () => {
       setTimeout(() => {
         fixture.detectChanges();
 
-        var iconElement = icons[ 0 ].nativeElement;
-        var svgElement = iconElement.firstElementChild;
+        const iconElement = icons[ 0 ].nativeElement;
+        const svgElement = iconElement.firstElementChild;
         expect(svgElement.tagName).toBe('svg');
         done();
       }, 50);
