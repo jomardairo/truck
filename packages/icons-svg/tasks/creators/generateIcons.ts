@@ -14,7 +14,7 @@ export interface GenerateIconsOptions
   filename: (option: { name: string }) => string;
 }
 
-export let generateIcons = ({
+export const generateIcons = ({
   from,
   toDir,
   svgoConfig,
