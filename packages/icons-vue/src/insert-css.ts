@@ -1,13 +1,13 @@
 // https://github.com/substack/insert-css
 
-var containers = []; // will store container HTMLElement references
-var styleElements = []; // will store {prepend: HTMLElement, append: HTMLElement}
+const containers = []; // will store container HTMLElement references
+const styleElements = []; // will store {prepend: HTMLElement, append: HTMLElement}
 
-var usage =
+const usage =
   'insert-css: You need to provide a CSS string. Usage: insertCss(cssString[, options]).';
 
 function createStyleElement() {
-  var styleElement = document.createElement('style');
+  const styleElement = document.createElement('style');
   styleElement.setAttribute('type', 'text/css');
   return styleElement;
 }
@@ -20,8 +20,8 @@ function insertCss(css: any, options: any): any {
     throw new Error(usage);
   }
 
-  var position = options.prepend === true ? 'prepend' : 'append';
-  var container =
+  const position = options.prepend === true ? 'prepend' : 'append';
+  const container =
     options.container !== undefined ? options.container : document.querySelector('head');
   let containerId = containers.indexOf(container);
 
@@ -42,7 +42,7 @@ function insertCss(css: any, options: any): any {
   } else {
     styleElement = styleElements[containerId][position] = createStyleElement();
 
-    var referenceNode = position === 'prepend' ? container.childNodes[0] || null : null;
+    const referenceNode = position === 'prepend' ? container.childNodes[0] || null : null;
     container.insertBefore(styleElement, referenceNode);
   }
 
