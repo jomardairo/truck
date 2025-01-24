@@ -3,7 +3,7 @@ import { normalizeTwoToneColors } from '../utils';
 
 export type TwoToneColor = string | [string, string];
 export function setTwoToneColor(twoToneColor: TwoToneColor): void {
-  const [primaryColor, secondaryColor] = normalizeTwoToneColors(twoToneColor);
+  let [primaryColor, secondaryColor] = normalizeTwoToneColors(twoToneColor);
   return VueIcon.setTwoToneColors({
     primaryColor,
     secondaryColor,
@@ -11,7 +11,7 @@ export function setTwoToneColor(twoToneColor: TwoToneColor): void {
 }
 
 export function getTwoToneColor(): TwoToneColor {
-  const colors = VueIcon.getTwoToneColors();
+  let colors = VueIcon.getTwoToneColors();
   if (!colors.calculated) {
     return colors.primaryColor;
   }
