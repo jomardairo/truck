@@ -1,11 +1,11 @@
-const { createConfig } = require('@umijs/test');
+let { createConfig } = require('@umijs/test');
 
-const defaultConfig = createConfig({
+let defaultConfig = createConfig({
   target: 'browser',
 });
 
 /** @type {import('@umijs/test').Config} */
-const config = {
+let config = {
   ...defaultConfig,
   testMatch: [ '**/?(*.)+(spec|test).[jt]s?(x)' ],
   setupFiles: [
