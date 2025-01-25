@@ -1,6 +1,6 @@
 import { defineConfig } from 'father';
 
-let config = defineConfig({
+const config = defineConfig({
   // Locked version only supports 1.0.0
   plugins: ['@rc-component/father-plugin'],
 });
