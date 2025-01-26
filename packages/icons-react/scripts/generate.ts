@@ -7,22 +7,22 @@ import { promisify } from 'util';
 import { template, isNil } from 'lodash';
 import pkgDir from 'pkg-dir';
 
-const writeFile = promisify(fs.writeFile);
+var writeFile = promisify(fs.writeFile);
 
 interface IconDefinitionWithIdentifier extends IconDefinition {
   svgIdentifier: string;
   svgBase64: string | null;
 }
 
-const svgPkg = require.resolve('@ant-design/icons-svg');
-const svgPkgDir = pkgDir.sync(path.dirname(svgPkg));
-const inlineSvgDir = path.join(svgPkgDir, 'inline-namespaced-svg');
+var svgPkg = require.resolve('@ant-design/icons-svg');
+var svgPkgDir = pkgDir.sync(path.dirname(svgPkg));
+var inlineSvgDir = path.join(svgPkgDir, 'inline-namespaced-svg');
 
 function detectRealPath(icon: IconDefinition) {
   try {
     if ([icon, icon?.theme, icon?.name].some(isNil)) return null
 
-    const _path = path.join(inlineSvgDir, icon.theme, `${icon.name}.svg`);
+    var _path = path.join(inlineSvgDir, icon.theme, `${icon.name}.svg`);
 
     return fs.existsSync(_path) ? _path : null;
   } catch (e) {
@@ -31,14 +31,14 @@ function detectRealPath(icon: IconDefinition) {
 }
 
 function svg2base64(svgPath: string, size = 50) {
-  const svg = fs.readFileSync(svgPath, 'utf-8');
-  const svgWithStyle = svg
+  var svg = fs.readFileSync(svgPath, 'utf-8');
+  var svgWithStyle = svg
     .replace(/<svg/, `<svg width="${size}" height="${size}" fill="#cacaca"`)
     // https://github.com/ant-design/ant-design-icons/blob/a02cbf8/packages/icons-svg/templates/helpers.ts#L3-L6
     .replace(/\#333/g, '#1677ff')
     .replace(/\#E6E6E6/ig, '#e6f4ff');
 
-  const base64 = Buffer.from(svgWithStyle).toString('base64');
+  var base64 = Buffer.from(svgWithStyle).toString('base64');
   return `data:image/svg+xml;base64,${base64}`;
 }
 
@@ -48,11 +48,11 @@ function walk<T>(
   return Promise.all(
     Object.keys(allIconDefs)
       .map(svgIdentifier => {
-        const iconDef = (allIconDefs as { [id: string]: IconDefinition })[
+        var iconDef = (allIconDefs as { [id: string]: IconDefinition })[
           svgIdentifier
         ];
 
-        const realSvgPath = detectRealPath(iconDef);
+        var realSvgPath = detectRealPath(iconDef);
         let svgBase64 = null;
         if (realSvgPath) {
           try { svgBase64 = svg2base64(realSvgPath) } catch (e) { /** nothing */ }
@@ -64,14 +64,14 @@ function walk<T>(
 }
 
 async function generateIcons() {
-  const iconsDir = path.join(__dirname, '../src/icons');
+  var iconsDir = path.join(__dirname, '../src/icons');
   try {
     await promisify(fs.access)(iconsDir);
   } catch (err) {
     await promisify(fs.mkdir)(iconsDir);
   }
 
-  const render = template(`
+  var render = template(`
 // GENERATE BY ./scripts/generate.ts
 // DON NOT EDIT IT MANUALLY
 
@@ -79,13 +79,13 @@ import * as React from 'react'
 import <%= svgIdentifier %>Svg from '@ant-design/icons-svg/lib/asn/<%= svgIdentifier %>';
 import AntdIcon, { AntdIconProps } from '../components/AntdIcon';
 
-const <%= svgIdentifier %> = (
+var <%= svgIdentifier %> = (
   props: AntdIconProps,
   ref: React.MutableRefObject<HTMLSpanElement>,
 ) => <AntdIcon {...props} ref={ref} icon={<%= svgIdentifier %>Svg} />;
 
 <% if (svgBase64) { %> /**![<%= name %>](<%= svgBase64 %>) */ <% } %>
-const RefIcon: React.ForwardRefExoticComponent<
+var RefIcon: React.ForwardRefExoticComponent<
   Omit<AntdIconProps, 'ref'> & React.RefAttributes<HTMLSpanElement>
 > = React.forwardRef<HTMLSpanElement, AntdIconProps>(<%= svgIdentifier %>);
 
@@ -105,7 +105,7 @@ export default RefIcon;
   });
 
   // generate icon index
-  const entryText = Object.keys(allIconDefs)
+  var entryText = Object.keys(allIconDefs)
     .sort()
     .map(svgIdentifier => `export { default as ${svgIdentifier} } from './${svgIdentifier}';`)
     .join('\n');
@@ -122,18 +122,18 @@ ${entryText}
 }
 
 async function generateEntries() {
-  const render = template(`
+  var render = template(`
 'use strict';
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
 
-const _<%= svgIdentifier %> = _interopRequireDefault(require('./lib/icons/<%= svgIdentifier %>'));
+var _<%= svgIdentifier %> = _interopRequireDefault(require('./lib/icons/<%= svgIdentifier %>'));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-const _default = _<%= svgIdentifier %>;
+var _default = _<%= svgIdentifier %>;
 exports.default = _default;
 module.exports = _default;
 `.trim());
