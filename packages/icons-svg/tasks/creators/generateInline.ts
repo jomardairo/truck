@@ -12,9 +12,9 @@ export interface GenerateInlineOptions {
   renderOptions?: HelperRenderOptions;
 }
 
-export const ExtractRegExp = /({\s*".*});/;
+export let ExtractRegExp = /({\s*".*});/;
 
-export const generateInline = ({
+export let generateInline = ({
   from,
   toDir,
   getIconDefinitionFromSource,
