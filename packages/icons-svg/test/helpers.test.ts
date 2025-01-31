@@ -1,7 +1,7 @@
 import { IdentifierMeta, getIdentifier } from '../utils';
 
 describe('getIdentifier', () => {
-  let examples: IdentifierMeta[] = [
+  const examples: IdentifierMeta[] = [
     { name: 'smile', themeSuffix: 'Filled' },
     { name: 'heskey-baozi-furry', themeSuffix: 'Outlined' },
     { name: 'heskey-baozi-furry', themeSuffix: 'TwoTone' },
