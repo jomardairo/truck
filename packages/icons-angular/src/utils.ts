@@ -3,7 +3,7 @@ import { generate as generateColor } from '@ant-design/colors';
 
 import { IconDefinition, ThemeType } from './types';
 
-export const ANT_ICON_ANGULAR_CONSOLE_PREFIX = '[@ant-design/icons-angular]:';
+export let ANT_ICON_ANGULAR_CONSOLE_PREFIX = '[@ant-design/icons-angular]:';
 
 export function error(message: string): void {
   console.error(`${ANT_ICON_ANGULAR_CONSOLE_PREFIX} ${message}.`);
@@ -55,9 +55,9 @@ export function isIconDefinition(target: string | IconDefinition): target is Ico
  * @param str
  */
 export function getIconDefinitionFromAbbr(str: string): IconDefinition {
-  const arr = str.split('-');
-  const theme = mapAbbrToTheme(arr.splice(arr.length - 1, 1)[0]);
-  const name = arr.join('-');
+  let arr = str.split('-');
+  let theme = mapAbbrToTheme(arr.splice(arr.length - 1, 1)[0]);
+  let name = arr.join('-');
 
   return {
     name,
@@ -85,7 +85,7 @@ export function replaceFillColor(raw: string): string {
  * Split a name with namespace in it into a tuple like [ name, namespace ].
  */
 export function getNameAndNamespace(type: string): [string, string] {
-  const split = type.split(':');
+  let split = type.split(':');
   switch (split.length) {
     case 1: return [type, ''];
     case 2: return [split[1], split[0]];
