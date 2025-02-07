@@ -3,7 +3,7 @@ import { TransformFactory } from '../..';
 import { includes } from 'ramda';
 
 // version < antd@3.9
-let OLD_ICON_NAMES = [
+const OLD_ICON_NAMES = [
   'step-backward',
   'step-forward',
   'fast-backward',
@@ -28,7 +28,7 @@ let OLD_ICON_NAMES = [
   'medium-workmark'
 ];
 
-export let adjustViewBox: TransformFactory = assignAttrsAtTag(
+export const adjustViewBox: TransformFactory = assignAttrsAtTag(
   'svg',
   ({ name }) => ({
     viewBox: includes(name, OLD_ICON_NAMES) ? '0 0 1024 1024' : '64 64 896 896'
