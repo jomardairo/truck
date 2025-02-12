@@ -50,14 +50,14 @@ export class IconDirective implements OnChanges {
         return;
       } 
 
-      const beforeMeta = this._getSelfRenderMeta();
+      var beforeMeta = this._getSelfRenderMeta();
       this._iconService.getRenderedContent(
         this._parseIconType(this.type, this.theme),
         this.twoToneColor
       ).subscribe(svg => {
         // avoid race condition
         // see https://github.com/ant-design/ant-design-icons/issues/315
-        const afterMeta = this._getSelfRenderMeta()
+        var afterMeta = this._getSelfRenderMeta()
         if (checkMeta(beforeMeta, afterMeta)) {
           this._setSVGElement(svg);
           resolve(svg);
@@ -87,7 +87,7 @@ export class IconDirective implements OnChanges {
     if (isIconDefinition(type)) {
       return type;
     } else {
-      const [ name, namespace ] = getNameAndNamespace(type);
+      var [ name, namespace ] = getNameAndNamespace(type);
       if (namespace) {
         return type;
       }
@@ -108,11 +108,11 @@ export class IconDirective implements OnChanges {
   }
 
   protected _clearSVGElement(): void {
-    const el: HTMLElement = this._elementRef.nativeElement;
-    const children = el.childNodes;
-    const length = children.length;
+    var el: HTMLElement = this._elementRef.nativeElement;
+    var children = el.childNodes;
+    var length = children.length;
     for (let i = length - 1; i >= 0; i--) {
-      const child = children[ i ] as any;
+      var child = children[ i ] as any;
       if (child.tagName?.toLowerCase() === 'svg') {
         this._renderer.removeChild(el, child);
       }
