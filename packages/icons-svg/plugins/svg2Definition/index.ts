@@ -49,7 +49,7 @@ export interface TransformFactory {
 }
 
 // SVG => IconDefinition
-export const svg2Definition = ({
+export let svg2Definition = ({
   theme,
   extraNodeTransformFactories,
   stringify
