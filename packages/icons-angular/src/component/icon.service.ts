@@ -40,9 +40,9 @@ import {
   UrlNotSafeError
 } from './icon.error';
 
-var JSONP_HANDLER_NAME = '__ant_icon_load';
+const JSONP_HANDLER_NAME = '__ant_icon_load';
 
-export var ANT_ICONS = new InjectionToken<IconDefinition[]>('ant_icons');
+export const ANT_ICONS = new InjectionToken<IconDefinition[]>('ant_icons');
 
 @Injectable({
   providedIn: 'root'
@@ -162,7 +162,7 @@ export class IconService {
    * @param literal
    */
   addIconLiteral(type: string, literal: string): void {
-    var [_, namespace] = getNameAndNamespace(type);
+    const [_, namespace] = getNameAndNamespace(type);
     if (!namespace) {
       throw NameSpaceIsNotSpecifyError();
     }
@@ -187,7 +187,7 @@ export class IconService {
     twoToneColor?: string
   ): Observable<SVGElement> {
     // If `icon` is a `IconDefinition`, go to the next step. If not, try to fetch it from cache.
-    var definition: IconDefinition | null = isIconDefinition(icon)
+    const definition: IconDefinition | null = isIconDefinition(icon)
       ? (icon as IconDefinition)
       : this._svgDefinitions.get(icon) || null;
     
@@ -197,7 +197,7 @@ export class IconService {
 
     // If `icon` is a `IconDefinition` of successfully fetch, wrap it in an `Observable`.
     // Otherwise try to fetch it from remote.
-    var $iconDefinition = definition
+    const $iconDefinition = definition
       ? of(definition)
       : this._loadIconDynamically(icon as string);
 
@@ -233,26 +233,26 @@ export class IconService {
     let inProgress = this._inProgressFetches.get(type);
 
     if (!inProgress) {
-      var [name, namespace] = getNameAndNamespace(type);
+      const [name, namespace] = getNameAndNamespace(type);
 
       // If the string has a namespace within, create a simple `IconDefinition`.
-      var icon: IconDefinition = namespace
+      const icon: IconDefinition = namespace
         ? { name: type, icon: '' }
         : getIconDefinitionFromAbbr(name);
 
-      var suffix = this._enableJsonpLoading ? '.js' : '.svg';
-      var url =
+      const suffix = this._enableJsonpLoading ? '.js' : '.svg';
+      const url =
         (namespace
           ? `${this._assetsUrlRoot}assets/${namespace}/${name}`
           : `${this._assetsUrlRoot}assets/${icon.theme}/${icon.name}`) + suffix;
 
-      var safeUrl = this.sanitizer.sanitize(SecurityContext.URL, url);
+      const safeUrl = this.sanitizer.sanitize(SecurityContext.URL, url);
 
       if (!safeUrl) {
         throw UrlNotSafeError(url);
       }
 
-      var source = !this._enableJsonpLoading
+      const source = !this._enableJsonpLoading
         ? this._http
             .get(safeUrl, { responseType: 'text' })
             .pipe(map(literal => ({ ...icon, icon: literal })))
@@ -273,8 +273,8 @@ export class IconService {
 
   protected _loadIconDynamicallyWithJsonp(icon: IconDefinition, url: string): Observable<IconDefinition> {
     return new Observable<IconDefinition>(subscriber => {
-      var loader = this._document.createElement('script');
-      var timer = setTimeout(() => {
+      const loader = this._document.createElement('script');
+      const timer = setTimeout(() => {
         clean();
         subscriber.error(DynamicLoadingTimeoutError());
       }, 6000);
@@ -310,10 +310,10 @@ export class IconService {
   ): SVGElement {
     let svg: SVGElement;
 
-    var pri = twoToneColor || this._twoToneColorPalette.primaryColor;
-    var sec =
+    const pri = twoToneColor || this._twoToneColorPalette.primaryColor;
+    const sec =
       getSecondaryColor(pri) || this._twoToneColorPalette.secondaryColor;
-    var key =
+    const key =
       icon.theme === 'twotone'
         ? withSuffixAndColor(icon.name, icon.theme, pri, sec)
         : icon.theme === undefined
@@ -321,7 +321,7 @@ export class IconService {
         : withSuffix(icon.name, icon.theme);
 
     // Try to make a copy from cache.
-    var cached = this._svgRenderedDefinitions.get(key);
+    const cached = this._svgRenderedDefinitions.get(key);
 
     if (cached) {
       svg = cached.icon;
@@ -348,9 +348,9 @@ export class IconService {
   }
 
   protected _createSVGElementFromString(str: string): SVGElement {
-    var div = this._document.createElement('div');
+    const div = this._document.createElement('div');
     div.innerHTML = str;
-    var svg: SVGElement = div.querySelector('svg');
+    const svg: SVGElement = div.querySelector('svg');
     if (!svg) {
       throw SVGTagNotFoundError;
     }
@@ -370,10 +370,10 @@ export class IconService {
     sec: string
   ): SVGElement {
     if (twotone) {
-      var children = svg.childNodes;
-      var length = children.length;
+      const children = svg.childNodes;
+      const length = children.length;
       for (let i = 0; i < length; i++) {
-        var child: HTMLElement = children[i] as HTMLElement;
+        const child: HTMLElement = children[i] as HTMLElement;
         if (child.getAttribute('fill') === 'secondaryColor') {
           this._renderer.setAttribute(child, 'fill', sec);
         } else {
