@@ -6,7 +6,7 @@
 
 import SVGO from 'svgo';
 
-export const base: SVGO.Options = {
+export let base: SVGO.Options = {
   floatPrecision: 2,
   plugins: [
     { cleanupAttrs: true },
