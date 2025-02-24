@@ -4,7 +4,7 @@ import { ApplicationConfig } from '@angular/core';
 import { AppInterceptor } from './app-interceptor';
 import { provideAntIcons } from '@ant-design/icons-angular';
 
-export const appConfig: ApplicationConfig = {
+export let appConfig: ApplicationConfig = {
   providers: [
     {
         provide: HTTP_INTERCEPTORS,
