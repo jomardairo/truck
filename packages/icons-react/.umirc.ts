@@ -2,8 +2,8 @@
 import { defineConfig } from 'dumi';
 import path from 'path';
 
-let libPath = path.resolve(__dirname, './src');
-let iconsPath = path.resolve(__dirname, './src/icons');
+const libPath = path.resolve(__dirname, './src');
+const iconsPath = path.resolve(__dirname, './src/icons');
 
 export default defineConfig({
   title: 'Ant Design icons',
