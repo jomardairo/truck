@@ -10,11 +10,11 @@ export interface MapToInterpolate {
   (meta: { name: string; content: string; path: string }): object;
 }
 
-export const useTemplate = ({
+export let useTemplate = ({
   template: tplContent,
   mapToInterpolate
 }: UseTemplatePluginOptions) => {
-  const executor = template(tplContent);
+  let executor = template(tplContent);
   return createTransformStream((content, { stem: name, path }) =>
     executor(mapToInterpolate({ name, content, path }))
   );
