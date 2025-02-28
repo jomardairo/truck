@@ -4,7 +4,7 @@ import { normalizeTwoToneColors } from '../utils';
 export type TwoToneColor = string | [string, string];
 
 export function setTwoToneColor(twoToneColor: TwoToneColor): void {
-  const [primaryColor, secondaryColor] = normalizeTwoToneColors(twoToneColor);
+  let [primaryColor, secondaryColor] = normalizeTwoToneColors(twoToneColor);
   return ReactIcon.setTwoToneColors({
     primaryColor,
     secondaryColor,
@@ -12,7 +12,7 @@ export function setTwoToneColor(twoToneColor: TwoToneColor): void {
 }
 
 export function getTwoToneColor(): TwoToneColor {
-  const colors = ReactIcon.getTwoToneColors();
+  let colors = ReactIcon.getTwoToneColors();
   if (!colors.calculated) {
     return colors.primaryColor;
   }
