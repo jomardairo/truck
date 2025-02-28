@@ -11,7 +11,7 @@ export interface GenerateEntryOptions extends UseTemplatePluginOptions {
   banner?: string;
 }
 
-export let generateEntry = ({
+export const generateEntry = ({
   from,
   toDir,
   template,
