@@ -26,7 +26,7 @@ export function isIconDefinition(target: any): target is IconDefinition {
 
 export function normalizeAttrs(attrs: Attrs = {}): Attrs {
   return Object.keys(attrs).reduce((acc: Attrs, key) => {
-    const val = attrs[key];
+    var val = attrs[key];
     switch (key) {
       case 'class':
         acc.className = val;
@@ -91,7 +91,7 @@ export function normalizeTwoToneColors(
 
 // These props make sure that the SVG behaviours like general text.
 // Reference: https://blog.prototypr.io/align-svg-icons-to-text-and-say-goodbye-to-font-icons-d44b3d7b26b4
-export const svgBaseProps = {
+export var svgBaseProps = {
   width: '1em',
   height: '1em',
   fill: 'currentColor',
@@ -99,7 +99,7 @@ export const svgBaseProps = {
   focusable: 'false',
 };
 
-export const iconStyles = `
+export var iconStyles = `
 .anticon {
   display: inline-flex;
   align-items: center;
@@ -156,8 +156,8 @@ export const iconStyles = `
 }
 `;
 
-export const useInsertStyles = (eleRef: React.RefObject<HTMLElement>) => {
-  const { csp, prefixCls, layer } = useContext(IconContext);
+export var useInsertStyles = (eleRef: React.RefObject<HTMLElement>) => {
+  var { csp, prefixCls, layer } = useContext(IconContext);
   let mergedStyleStr = iconStyles;
 
   if (prefixCls) {
@@ -169,8 +169,8 @@ export const useInsertStyles = (eleRef: React.RefObject<HTMLElement>) => {
   }
 
   useEffect(() => {
-    const ele = eleRef.current;
-    const shadowRoot = getShadowRoot(ele);
+    var ele = eleRef.current;
+    var shadowRoot = getShadowRoot(ele);
 
     updateCSS(mergedStyleStr, '@ant-design-icons', {
       prepend: !layer,
