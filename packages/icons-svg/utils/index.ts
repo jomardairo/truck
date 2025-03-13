@@ -12,7 +12,7 @@ export interface GetIdentifierType {
   (meta: IdentifierMeta): string;
 }
 
-export let getIdentifier: GetIdentifierType = pipe(
+export const getIdentifier: GetIdentifierType = pipe(
   ({ name, themeSuffix }: IdentifierMeta) =>
     name + (themeSuffix ? `-${themeSuffix}` : ''),
   camelCase,
