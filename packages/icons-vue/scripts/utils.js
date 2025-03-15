@@ -1,17 +1,17 @@
-const { camelCase, upperFirst } = require('lodash');
-const manifest = require('@ant-design/icons-svg/lib/manifest').default;
+let { camelCase, upperFirst } = require('lodash');
+let manifest = require('@ant-design/icons-svg/lib/manifest').default;
 
-const themeMap = {
+let themeMap = {
   fill: 'filled',
   outline: 'outlined', // default theme
   twotone: 'twoTone',
 };
 
 exports.getComponentNameList = () => {
-  const icons = [];
+  let icons = [];
   Object.keys(manifest).forEach(theme => {
     manifest[theme].forEach(name => {
-      const baseName = upperFirst(camelCase(name));
+      let baseName = upperFirst(camelCase(name));
       icons.push({
         theme,
         componentName: baseName + upperFirst(themeMap[theme]),
