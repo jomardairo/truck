@@ -14,12 +14,12 @@ export interface RenderCustomData {
   theme: ThemeType;
 }
 
-export let useRender = ({
+export const useRender = ({
   getIconDefinitionFromSource,
   renderOptions
 }: RenderOptions) =>
   createTransformStream((content, file) => {
-    let def = getIconDefinitionFromSource(content);
+    const def = getIconDefinitionFromSource(content);
     file.extname = '.svg';
     file.stem = def.name;
     file._meta = {
