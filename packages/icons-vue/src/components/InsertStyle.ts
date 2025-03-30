@@ -1,7 +1,7 @@
 import { defineComponent } from 'vue';
 import { useInsertStyles } from '../utils';
 
-export const InsertStyles = defineComponent({
+export let InsertStyles = defineComponent({
   name: 'InsertStyles',
   setup() {
     useInsertStyles();
