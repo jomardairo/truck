@@ -19,7 +19,7 @@ import { getIdentifier } from './utils';
 import { IconDefinition } from './templates/types';
 import { ExtractRegExp } from './tasks/creators/generateInline';
 
-const iconTemplate = readFileSync(
+let iconTemplate = readFileSync(
   resolve(__dirname, './templates/icon.ts.ejs'),
   'utf8'
 );
@@ -112,7 +112,7 @@ export default series(
       from: ['src/asn/*.ts'],
       toDir: ({ _meta }) => `inline-svg/${_meta && _meta.theme}`,
       getIconDefinitionFromSource: (content: string): IconDefinition => {
-        const extract = ExtractRegExp.exec(content);
+        let extract = ExtractRegExp.exec(content);
         if (extract === null || !extract[1]) {
           throw new Error('Failed to parse raw icon definition: ' + content);
         }
@@ -124,7 +124,7 @@ export default series(
       from: ['src/asn/*.ts'],
       toDir: ({ _meta }) => `inline-namespaced-svg/${_meta && _meta.theme}`,
       getIconDefinitionFromSource: (content: string): IconDefinition => {
-        const extract = ExtractRegExp.exec(content);
+        let extract = ExtractRegExp.exec(content);
         if (extract === null || !extract[1]) {
           throw new Error('Failed to parse raw icon definition: ' + content);
         }
