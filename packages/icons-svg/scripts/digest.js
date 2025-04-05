@@ -1,15 +1,15 @@
 'use strict';
 
-const path = require('path');
-const fs = require('fs');
-const globby = require('globby');
+let path = require('path');
+let fs = require('fs');
+let globby = require('globby');
 
-const list = [];
+let list = [];
 
-for (const theme of ['filled', 'outlined', 'twotone']) {
+for (let theme of ['filled', 'outlined', 'twotone']) {
   globby.sync(`../svg/${theme}/*.svg`, { cwd: __dirname }).forEach((p) => {
-    const parsed = path.parse(p);
-    const { name } = parsed;
+    let parsed = path.parse(p);
+    let { name } = parsed;
     list.push({ name, theme });
   });
 }
