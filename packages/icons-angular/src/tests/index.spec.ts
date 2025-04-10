@@ -13,9 +13,9 @@ const DOWN_SQUARE_TWOTONE_ICON = '<svg viewBox="64 64 896 896" focusable="false"
 
 describe('icons-angular', () => {
   describe('basics', () => {
-    var testComponent: TestIconComponent;
-    var fixture: ComponentFixture<TestIconComponent>;
-    var icon: DebugElement;
+    let testComponent: TestIconComponent;
+    let fixture: ComponentFixture<TestIconComponent>;
+    let icon: DebugElement;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -49,9 +49,9 @@ describe('icons-angular', () => {
   });
 
   describe('namespace', () => {
-    var testComponent: TestIconNamespaceComponent;
-    var fixture: ComponentFixture<TestIconNamespaceComponent>;
-    var icon: DebugElement;
+    let testComponent: TestIconNamespaceComponent;
+    let fixture: ComponentFixture<TestIconNamespaceComponent>;
+    let icon: DebugElement;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
