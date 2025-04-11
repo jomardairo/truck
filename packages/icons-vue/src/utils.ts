@@ -31,7 +31,7 @@ export function isIconDefinition(target: any): target is IconDefinition {
 
 export function normalizeAttrs(attrs: Attrs = {}): Attrs {
   return Object.keys(attrs).reduce((acc: Attrs, key) => {
-    var val = attrs[key];
+    const val = attrs[key];
     switch (key) {
       case 'class':
         acc.className = val;
@@ -91,7 +91,7 @@ export function normalizeTwoToneColors(
 
 // These props make sure that the SVG behaviours like general text.
 // Reference: https://blog.prototypr.io/align-svg-icons-to-text-and-say-goodbye-to-font-icons-d44b3d7b26b4
-export var svgBaseProps = {
+export const svgBaseProps = {
   width: '1em',
   height: '1em',
   fill: 'currentColor',
@@ -99,7 +99,7 @@ export var svgBaseProps = {
   focusable: 'false',
 } as any;
 
-export var iconStyles = `
+export const iconStyles = `
 .anticon {
   display: inline-block;
   color: inherit;
@@ -176,9 +176,9 @@ function getShadowRoot(ele: Node): ShadowRoot {
   return inShadow(ele) ? (getRoot(ele) as ShadowRoot) : null;
 }
 
-export var useInsertStyles = (): void => {
-  var { prefixCls, csp } = useInjectIconContext();
-  var instance = getCurrentInstance();
+export const useInsertStyles = (): void => {
+  const { prefixCls, csp } = useInjectIconContext();
+  const instance = getCurrentInstance();
   let mergedStyleStr = iconStyles;
 
   if (prefixCls) {
@@ -189,8 +189,8 @@ export var useInsertStyles = (): void => {
     if (!canUseDom()) {
       return;
     }
-    var ele = instance.vnode.el as any;
-    var shadowRoot = getShadowRoot(ele);
+    const ele = instance.vnode.el as any;
+    const shadowRoot = getShadowRoot(ele);
     updateCSS(mergedStyleStr, '@ant-design-vue-icons', {
       prepend: true,
       csp: csp.value,
