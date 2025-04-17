@@ -14,7 +14,7 @@ interface IconDefinitionWithIdentifier extends IconDefinition {
 function walk<T>(fn: (iconDef: IconDefinitionWithIdentifier) => Promise<T>) {
   return Promise.all(
     Object.keys(allIconDefs).map(svgIdentifier => {
-      let iconDef = (allIconDefs as { [id: string]: IconDefinition })[
+      const iconDef = (allIconDefs as { [id: string]: IconDefinition })[
         svgIdentifier
       ];
 
@@ -33,21 +33,21 @@ function adaptTheme(name: string): string {
 }
 
 async function generateIcons() {
-  let iconsDir = path.join(__dirname, '../src/icons');
+  const iconsDir = path.join(__dirname, '../src/icons');
   try {
     await fsPromises.access(iconsDir);
   } catch {
     await fsPromises.mkdir(iconsDir);
   }
 
-  let indexRender = template(`
+  const indexRender = template(`
 <%= content %>`);
-  let indexContent: string[] = [];
+  const indexContent: string[] = [];
 
-  let manifestRender = template(`
+  const manifestRender = template(`
 import { Manifest } from './types';
 
-export let manifest: Manifest = {
+export const manifest: Manifest = {
   fill: [
     <%= fill %>
   ],
@@ -58,7 +58,7 @@ export let manifest: Manifest = {
     <%= twotone %>
   ]
 }`);
-  let manifestContent: {
+  const manifestContent: {
     fill: string[];
     outline: string[];
     twotone: string[];
@@ -68,20 +68,20 @@ export let manifest: Manifest = {
     twotone: []
   };
 
-  let staicFileRender = template(
+  const staicFileRender = template(
     `
 import { IconDefinition } from '@ant-design/icons-angular';
 
-export let <%= svgIdentifier %>: IconDefinition = {
+export const <%= svgIdentifier %>: IconDefinition = {
     name: '<%= name %>',
     theme: '<%= theme %>',
     icon: '<%= inlineIcon %>'
 }`.trim()
   );
 
-  let svgRender = template(`<%= inlineIcon %>`);
+  const svgRender = template(`<%= inlineIcon %>`);
 
-  let jsonpRender = template(
+  const jsonpRender = template(
     `
 (function() {
   __ant_icon_load({
@@ -94,11 +94,11 @@ export let <%= svgIdentifier %>: IconDefinition = {
   );
 
   await walk(async ({ svgIdentifier, name, theme, icon }) => {
-    let inlineIcon = renderIconDefinitionToSVGElement({ name, theme, icon });
+    const inlineIcon = renderIconDefinitionToSVGElement({ name, theme, icon });
 
     svgIdentifier = adaptTheme(svgIdentifier);
 
-    let _theme = adaptTheme(theme) as AngularTheme;
+    const _theme = adaptTheme(theme) as AngularTheme;
 
     // Generate static loading resources.
     await fsPromises.writeFile(
